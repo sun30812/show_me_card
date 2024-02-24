@@ -135,7 +135,7 @@ class _PointReportState extends State<PointReport> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '총 이용 금액: ${widget.viewModel.calculateUsageMoney()}원 이용',
+                  '실적 반영 금액: ${widget.viewModel.calculateUsageMoney() + widget.viewModel.calculateExtraUsageMoney()}원 이용',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(

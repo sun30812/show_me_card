@@ -5,7 +5,7 @@ import 'package:show_me_card/repository/card_repository.dart';
 class TestRepository implements CardRepository {
   @override
   Future<List<PayCard>?> getAllCards() => Future.value([
-        PayCard(
+        const PayCard(
             id: 'dkfmk32-343',
             name: '현대카드 M Boost',
             isAbleGiftCard: true,
@@ -15,15 +15,39 @@ class TestRepository implements CardRepository {
             point: 0.5,
             extraPoints: {
               '온라인 간편결제': (5.0, 10000),
-              '커피(이디야, 폴바셋, 스타벅스)': (3.0, 0),
+              '커피(이디야, 폴바셋, 스타벅스), 영화(CGV, 롯데시네마, 메가박스)': (3.0, 0),
               '대중교통, 베이커리': (2.0, 0),
               '편의점, 학원': (1.0, 0),
               '외식, 통신': (0.7, 0)
             },
+            bonus: (10000, 1000000),
+            boost: {0: 0, 50: 1.0, 100: 1.5},
+            isBoostApplyForAll: true,
             type: CardType.reward,
             description:
                 '어디서나 한도 없는 최대 3% X 1.5배 적립\n페이·해외결제 5% 적립\n당월 이용금액 100만원 이상 시 1만 M포인트 추가 적립'),
-        PayCard(
+        const PayCard(
+            id: 'dkfmk32-350',
+            name: '현대카드 M3 Boost',
+            isAbleGiftCard: true,
+            isDiscountGiftCard: false,
+            limit: 0,
+            loyalty: 0,
+            point: 0.5,
+            extraPoints: {
+              '온라인 간편결제': (5.0, 10000),
+              '커피(이디야, 폴바셋, 스타벅스), 영화(CGV, 롯데시네마, 메가박스)': (3.0, 0),
+              '대중교통, 베이커리': (2.0, 0),
+              '편의점, 학원': (1.0, 0),
+              '외식, 통신': (0.7, 0)
+            },
+            bonus: (10000, 1000000),
+            boost: {0: 0, 50: 1.0, 100: 1.5, 200: 2.0},
+            isBoostApplyForAll: true,
+            type: CardType.reward,
+            description:
+                '어디서나 한도 없는 최대 3% X 1.5배 적립\n페이·해외결제 5% 적립\n당월 이용금액 100만원 이상 시 1만 M포인트 추가 적립'),
+        const PayCard(
             id: 'dkfmk32-100',
             name: 'SC Zero Ed2 포인트형',
             isAbleGiftCard: false,
@@ -39,7 +63,7 @@ class TestRepository implements CardRepository {
             },
             type: CardType.reward,
             description: '실적, 한도 제한 없는 카드'),
-        PayCard(
+        const PayCard(
             id: 'dkfmk32-112',
             name: '현대 Zero Ed3 포인트형',
             isAbleGiftCard: false,
@@ -49,7 +73,7 @@ class TestRepository implements CardRepository {
             point: 1.2,
             type: CardType.reward,
             description: '실적, 한도제한 없는 카드'),
-        PayCard(
+        const PayCard(
             id: 'dkfmk32-113',
             name: '현대 Zero Ed3 할인형',
             isAbleGiftCard: false,
@@ -59,7 +83,7 @@ class TestRepository implements CardRepository {
             point: 0.8,
             type: CardType.discount,
             description: '실적, 한도 제한 없는 카드'),
-        PayCard(
+        const PayCard(
             id: 'dkfmk32-8182',
             name: '현대카드 Z Work',
             isAbleGiftCard: false,
@@ -76,13 +100,13 @@ class TestRepository implements CardRepository {
             },
             type: CardType.discount,
             description: '직장인이 즐겨쓰는 5개 영역 청구 할인'),
-        PayCard(
+        const PayCard(
             id: 'dkfmk32-p005',
             name: 'the Green Edition2',
             isAbleGiftCard: true,
             isDiscountGiftCard: false,
             limit: 0,
-            loyalty: 500000,
+            loyalty: 50,
             point: 1.0,
             extraPoints: {
               '여행': (5.0, 50000),
@@ -92,13 +116,13 @@ class TestRepository implements CardRepository {
             type: CardType.reward,
             description:
                 '자유와 모험을 즐기는 나의 첫 럭셔리 카드\n10만 M포인트당 the Green 바우처 10만원권 교환'),
-        PayCard(
+        const PayCard(
             id: 'dkfmk32-p003',
             name: 'the Pink',
             isAbleGiftCard: true,
             isDiscountGiftCard: false,
             limit: 0,
-            loyalty: 500000,
+            loyalty: 50,
             point: 1.0,
             extraPoints: {
               '백화점 온라인 몰(SSG.COM, 롯데ON, 현대Hmall)': (5.0, 50000),
@@ -108,7 +132,7 @@ class TestRepository implements CardRepository {
             type: CardType.reward,
             description:
                 '프로 쇼퍼들의 필수 럭셔리 카드\nM포인트로 상품권 교환, 면세점에서 사용 가능한 the Pink 바우처 교환,the Pink 최초 발급 시 웰컴 바우처 제공'),
-        PayCard(
+        const PayCard(
             id: 'dkfmk32-n002',
             name: '넥슨 현대카드',
             isAbleGiftCard: false,
@@ -122,7 +146,7 @@ class TestRepository implements CardRepository {
             type: CardType.reward,
             description:
                 '최대 2% 넥슨 현대카드 포인트 적립\n이용할 때마다 쌓이는 포인트 혜택\n전월 실적이 30만원 이상인 경우 적립 포인트는 전 가맹점에 기입하지 마세요'),
-        PayCard(
+        const PayCard(
             id: 'shaimw-0p1',
             name: '신한카드 Deep Dream',
             isAbleGiftCard: false,
