@@ -79,7 +79,7 @@ class PayCard {
   final String description;
 
   /// 카드 정보를 가진 객체
-  PayCard(
+  const PayCard(
       {required this.id,
       required this.name,
       required this.isAbleGiftCard,
@@ -94,14 +94,23 @@ class PayCard {
       required this.type,
       required this.description});
 
-  int calculatePoint(
-      int usageMoney, int prevUsageMoney, Map<String, int>? usageExtraMoney) {
+  /// 카드 포인트를 계산하는 메서드
+  ///
+  /// [usageMoney]에 사움권 구매 실적을 제외한 실적이 인정되는 사용 금액을 입력하고, [giftCardMoney]에
+  /// 상품권 구매 실적 인정 금액을 기입한다.
+  /// 전월 실적 계산을 위해 [prevUsageMoney]에 전월 실적 인정 금액을 입력한 뒤 [usageExtraMoney]에 <혜택 영역 이름, 사용 금액>
+  /// 형태로 전달하면 된다.
+  int calculatePoint(int usageMoney, int giftCardMoney, int prevUsageMoney,
+      Map<String, int>? usageExtraMoney) {
     assert((boost == null) == (isBoostApplyForAll == null));
     List<int> boostList = boost != null ? boost!.keys.toList() : [];
     boostList.sort();
-    var target =
-        boostList.where((element) => element <= usageMoney / 10000).lastOrNull;
-    var result = usageMoney *
+    var target = boostList
+        .where((element) =>
+            element <=
+            (usageMoney + (isAbleGiftCard ? giftCardMoney : 0)) / 10000)
+        .lastOrNull;
+    var result = (usageMoney + (isDiscountGiftCard ? giftCardMoney : 0)) *
         (point *
             ((target != null) && (isBoostApplyForAll == true)
                 ? boost![target]!

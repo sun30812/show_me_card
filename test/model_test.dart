@@ -3,7 +3,7 @@ import 'package:show_me_card/model/card.dart';
 
 void main() {
   test('Card point calculation test', () {
-    final card = PayCard(
+    const card = PayCard(
         id: 'test',
         name: 'Normal Card',
         isAbleGiftCard: true,
@@ -13,7 +13,7 @@ void main() {
         point: 3,
         type: CardType.reward,
         description: 'Default Card');
-    expect(card.calculatePoint(5300000, 0, null), 20000);
-    expect(card.calculatePoint(530000, 0, null), 15900);
+    expect(card.calculatePoint(5300000, 0, 0, null), 20000);
+    expect(card.calculatePoint(530000, 0, 0, null), 15900);
   });
 }

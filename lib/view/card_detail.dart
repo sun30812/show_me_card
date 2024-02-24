@@ -79,7 +79,7 @@ class CardDetail extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
-                        Text('기타 가맹점 사용 금액: '),
+                        const Text('기타 실적 반영 가맹점 사용 금액: '),
                         Flexible(
                             child: TextField(
                           controller: _viewModel.usageMoneyController,
@@ -89,6 +89,22 @@ class CardDetail extends StatelessWidget {
                       ],
                     ),
                   ),
+                  if (card.isAbleGiftCard) ...[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          const Text('상품권 구매 금액: '),
+                          Flexible(
+                              child: TextField(
+                            controller: _viewModel.giftCardMoneyController,
+                            decoration: const InputDecoration(filled: true),
+                          )),
+                          const Text('원')
+                        ],
+                      ),
+                    )
+                  ]
                 ],
               ),
             ),
@@ -123,7 +139,7 @@ class _PointReportState extends State<PointReport> {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             )
           ]),
       child: Row(

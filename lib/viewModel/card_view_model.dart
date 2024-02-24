@@ -30,10 +30,8 @@ class CardDetailViewModel {
   /// 받을 혜택을 계산하는 메서드
   int calculateMyPoint() {
     var calculatePoint = _card.calculatePoint(
-        calculateUsageMoney() -
-            (!_card.isDiscountGiftCard
-                ? (int.tryParse(giftCardMoneyController.text) ?? 0)
-                : 0),
+        calculateUsageMoney(),
+        int.tryParse(giftCardMoneyController.text) ?? 0,
         0,
         usageExtraMoney?.map(
             (key, value) => MapEntry(key, int.tryParse(value.text) ?? 0)));
@@ -46,6 +44,9 @@ class CardDetailViewModel {
   }
 
   /// 실적 반영 금액을 계산하는 메서드
+  ///
+  /// 상품권 실적 여부가 인정되지 않는 카드는 혜택 계산기에 상품권 구매 금액 란이 표시되지 않으므로
+  /// 여기서 상품권 실적 적용 가능 여부를 판단할 필요가 없음.
   int calculateUsageMoney() {
     var usageMoney = int.tryParse(usageMoneyController.text) ?? 0;
     var giftCardMoney = int.tryParse(giftCardMoneyController.text) ?? 0;

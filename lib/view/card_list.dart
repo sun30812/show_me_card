@@ -37,9 +37,28 @@ class CardList extends StatelessWidget {
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        snapshot.data![index].name,
-                        style: Theme.of(context).textTheme.titleLarge,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            snapshot.data![index].name,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              if (snapshot.data![index].isAbleGiftCard) ...[
+                                const Icon(Icons.card_giftcard)
+                              ] else if (snapshot
+                                  .data![index].isDiscountGiftCard) ...[
+                                const Icon(
+                                  Icons.card_giftcard,
+                                  color: Colors.blueAccent,
+                                )
+                              ]
+                            ],
+                          )
+                        ],
                       ),
                     ),
                   ),
