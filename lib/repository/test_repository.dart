@@ -170,4 +170,12 @@ class TestRepository implements CardRepository {
         SimplePayCard('dkfmk32-343', 'M Boost'),
         SimplePayCard('dkfmk32-100', 'SC Zero Ed2 포인트형'),
       ]);
+
+  @override
+  Future<PayCard?> getCard(String cardId) async {
+    var result =
+        (await getAllCards())?.where((element) => element.id == cardId);
+    assert(result?.length == 1, 'Duplicate or no card');
+    return result?.first;
+  }
 }

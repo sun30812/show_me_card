@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:show_me_card/model/card.dart';
-import 'package:show_me_card/view/card_detail.dart';
 import 'package:show_me_card/view/card_list.dart';
+import 'package:show_me_card/view/card_loading.dart';
 
 void main() => runApp(const MainApp());
 
@@ -17,7 +16,9 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'cards/:cardId',
           builder: (BuildContext context, GoRouterState state) {
-            return CardDetail(card: state.extra as PayCard);
+            return CardLoading(
+              cardId: state.pathParameters['cardId'] ?? 'null',
+            );
           },
         ),
       ],

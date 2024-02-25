@@ -12,4 +12,9 @@ class FirebaseRepository implements CardRepository {
   Future<List<PayCard>?> getAllCards() {
     throw UnimplementedError();
   }
+
+  @override
+  Future<PayCard?> getCard(String cardId) {
+    throw UnimplementedError();
+  }
 }
