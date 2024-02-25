@@ -29,16 +29,21 @@ class CardDetailViewModel {
 
   /// 받을 혜택을 계산하는 메서드
   int calculateMyPoint() {
+    var extraMoney = usageExtraMoney
+        ?.map((key, value) => MapEntry(key, int.tryParse(value.text) ?? 0));
+    var giftCardMoney = (int.tryParse(giftCardMoneyController.text) ?? 0);
     var calculatePoint = _card.calculatePoint(
-        calculateUsageMoney(),
-        int.tryParse(giftCardMoneyController.text) ?? 0,
-        0,
-        usageExtraMoney?.map(
-            (key, value) => MapEntry(key, int.tryParse(value.text) ?? 0)));
+        calculateUsageMoney() - giftCardMoney, giftCardMoney, 0, extraMoney);
 
     if (_card.bonus != null) {
-      calculatePoint +=
-          calculateUsageMoney() >= _card.bonus!.$2 ? _card.bonus!.$1 : 0;
+      calculatePoint += calculateUsageMoney() +
+          (extraMoney != null
+              ? extraMoney.values
+              .reduce((value, element) => value + element)
+              : 0) >=
+          _card.bonus!.$2
+          ? _card.bonus!.$1
+          : 0;
     }
     return calculatePoint;
   }

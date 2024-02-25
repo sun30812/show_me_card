@@ -105,11 +105,14 @@ class PayCard {
     assert((boost == null) == (isBoostApplyForAll == null));
     List<int> boostList = boost != null ? boost!.keys.toList() : [];
     boostList.sort();
-    var target = boostList
-        .where((element) =>
-            element <=
-            (usageMoney + (isAbleGiftCard ? giftCardMoney : 0)) / 10000)
-        .lastOrNull;
+    var target = boostList.where((element) {
+      var extraMoney = (usageExtraMoney != null
+          ? usageExtraMoney.values.reduce((value, element) => value + element)
+          : 0);
+      return element <=
+          (usageMoney + (isAbleGiftCard ? giftCardMoney : 0) + extraMoney) /
+              10000;
+    }).lastOrNull;
     var result = (usageMoney + (isDiscountGiftCard ? giftCardMoney : 0)) *
         (point *
             ((target != null) && (isBoostApplyForAll == true)

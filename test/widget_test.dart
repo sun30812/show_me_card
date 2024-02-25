@@ -29,30 +29,34 @@ void main() {
     testWidgets('Show card information', (widgetTester) async {
       await widgetTester.pumpWidget(const MainApp());
       await widgetTester.pumpAndSettle();
-      var finder = find.text('SC Zero Ed2 포인트형');
+      var finder = find.text('현대카드 M Boost');
       expect(finder, findsOne);
       await widgetTester.tap(finder);
       await widgetTester.pumpAndSettle();
       expect(finder, findsAtLeast(1));
       expect(find.text('혜택 계산기'), findsOne);
     });
-    testWidgets('Calculating point function test', (widgetTester) async {
+    testWidgets('Calculating point function test (현대카드 M Boost)',
+        (widgetTester) async {
       await widgetTester.pumpWidget(const MainApp());
       await widgetTester.pumpAndSettle();
-      var finder = find.text('SC Zero Ed2 포인트형');
+      var finder = find.textContaining('현대카드 M Boost', skipOffstage: false);
       expect(finder, findsOne);
       await widgetTester.tap(finder);
       await widgetTester.pumpAndSettle();
       var inputs = find.byType(TextField);
-      for (var i = 0; i < inputs.evaluate().length; i++) {
-        await widgetTester.enterText(inputs.at(i), '150000');
-      }
+      await widgetTester.enterText(inputs.at(0), '200000');
+      await widgetTester.enterText(inputs.at(1), '142000');
+      await widgetTester.enterText(inputs.at(2), '190000');
+      await widgetTester.enterText(inputs.at(3), '45000');
+      await widgetTester.enterText(inputs.at(4), '190000');
+      await widgetTester.enterText(inputs.at(5), '87000');
+      await widgetTester.enterText(inputs.at(6), '150000');
       await widgetTester.tap(find.byType(FilledButton));
       await widgetTester.pumpAndSettle();
-      expect(find.textContaining('750000'), findsOne);
+      expect(find.textContaining('1004000'), findsOne);
       expect(find.textContaining('적립'), findsAtLeast(1));
-      expect(find.textContaining('18750'), findsNothing);
-      expect(find.textContaining('16500'), findsOne);
+      expect(find.textContaining('35412'), findsOne);
     });
   });
 }
